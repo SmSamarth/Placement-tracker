@@ -3,7 +3,7 @@
 **AAT-1: Portfolio-Driven Activity · Full Stack Technologies**<br>
 New Horizon College of Engineering, Bengaluru · Department of Computer Science and Engineering
 
-**Student:** Naveen Kumar G. · **USN:** 1NH23CS164
+**Student:** Samarth. · **USN:** 1NH23CS218
 
 ## Introduction
 
