@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142b4a">
+  <meta name="description" content="A local-first dashboard for organizing placement and internship applications.">
+  <title>Placement Tracker | AAT-1</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard" aria-label="Placement Tracker home">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-copy"><strong>Pathway</strong><small>PLACEMENT TRACKER</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="navigation">
+        <a class="nav-link active" href="#dashboard" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span>Overview</a>
+        <a class="nav-link" href="#applications"><span class="nav-icon" aria-hidden="true">▤</span>Applications <span class="nav-count" id="nav-count">0</span></a>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <section class="sidebar-note" aria-label="Student profile">
+        <div class="profile-avatar" aria-hidden="true">NK</div>
+        <div><strong>Naveen Kumar G.</strong><span>1NH23CS164 · CSE</span></div>
+      </section>
+      <div class="sidebar-foot">AAT-1 · Full Stack Technologies</div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div>
+        <div class="topbar-actions">
+          <span class="local-indicator"><i aria-hidden="true"></i> Saved on this device</span>
+          <button class="button button-primary button-small" id="add-top" type="button"><span aria-hidden="true">+</span> Add application</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-intro">
+          <div>
+            <p class="eyebrow">PLACEMENT SEASON · 2026–27</p>
+            <h1>Your next opportunity,<br class="mobile-break"> in one place.</h1>
+            <p class="intro-copy">Track applications, hiring stages and deadlines without losing sight of what comes next.</p>
+          </div>
+          <div class="date-block"><span class="date-dot" aria-hidden="true"></span><span id="today-label"></span></div>
+        </section>
+
+        <section class="stats-grid" aria-label="Application summary">
+          <article class="stat-card stat-total"><div class="stat-heading"><span>Total applications</span><span class="stat-icon" aria-hidden="true">↗</span></div><div class="stat-value" id="stat-total">0</div><div class="stat-foot">Across all opportunities</div></article>
+          <article class="stat-card stat-progress"><div class="stat-heading"><span>In progress</span><span class="stat-icon" aria-hidden="true">◷</span></div><div class="stat-value" id="stat-progress">0</div><div class="stat-foot">Active hiring processes</div></article>
+          <article class="stat-card stat-offers"><div class="stat-heading"><span>Offers received</span><span class="stat-icon" aria-hidden="true">✳</span></div><div class="stat-value" id="stat-offers">0</div><div class="stat-foot">A reason to celebrate</div></article>
+          <article class="stat-card stat-deadlines"><div class="stat-heading"><span>Upcoming deadlines</span><span class="stat-icon" aria-hidden="true">▣</span></div><div class="stat-value" id="stat-deadlines">0</div><div class="stat-foot">Due within the next 7 days</div></article>
+        </section>
+
+        <section class="applications-section" id="applications" aria-labelledby="applications-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">YOUR PIPELINE</p><h2 id="applications-heading">Applications</h2></div>
+            <div class="section-actions">
+              <button class="button button-quiet" id="export-button" type="button" title="Download a JSON backup"><span aria-hidden="true">↓</span> Export</button>
+              <button class="button button-quiet" id="import-button" type="button" title="Restore from a JSON backup"><span aria-hidden="true">↑</span> Import</button>
+              <input id="import-file" type="file" accept="application/json,.json" hidden>
+              <button class="button button-primary" id="add-main" type="button"><span aria-hidden="true">+</span> Add application</button>
+            </div>
+          </div>
+
+          <div class="toolbar" role="search">
+            <label class="search-box"><span class="search-icon" aria-hidden="true">⌕</span><span class="visually-hidden">Search by company or role</span><input id="search-input" type="search" placeholder="Search company or role" autocomplete="off"></label>
+            <label class="select-wrap"><span class="visually-hidden">Filter by status</span><select id="status-filter"><option value="">All statuses</option><option>Wishlist</option><option>Applied</option><option>Online Test</option><option>Interview</option><option>Offered</option><option>Rejected</option></select></label>
+            <label class="select-wrap"><span class="visually-hidden">Filter by job type</span><select id="type-filter"><option value="">All job types</option><option>Internship</option><option>Full-Time</option><option>Internship + PPO</option></select></label>
+            <label class="select-wrap sort-wrap"><span class="visually-hidden">Sort applications</span><select id="sort-select"><option value="deadline-asc">Deadline: soonest</option><option value="deadline-desc">Deadline: latest</option><option value="company-asc">Company: A to Z</option><option value="updated-desc">Recently updated</option></select></label>
+          </div>
+
+          <div class="list-meta"><span id="results-count">0 applications</span><button class="text-button" id="reset-filters" type="button">Clear filters</button></div>
+          <div class="application-list" id="application-list" aria-live="polite"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <div class="empty-art" aria-hidden="true"><span>+</span></div>
+            <h3 id="empty-title">Your pipeline starts here</h3>
+            <p id="empty-copy">Add your first opportunity and keep every next step in view.</p>
+            <button class="button button-primary" id="empty-add" type="button">Add your first application</button>
+          </div>
+        </section>
+
+        <footer class="page-footer"><span>New Horizon College of Engineering · Bengaluru</span><span>Portfolio-Driven Activity · AAT-1</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="application-dialog" id="application-dialog" aria-labelledby="dialog-title">
+    <form id="application-form" novalidate>
+      <div class="dialog-header"><div><p class="eyebrow">OPPORTUNITY DETAILS</p><h2 id="dialog-title">Add application</h2></div><button class="icon-button" type="button" id="close-dialog" aria-label="Close dialog">×</button></div>
+      <input type="hidden" id="record-id">
+      <div class="form-grid">
+        <label class="field field-wide">Company name <span class="required">*</span><input id="company" name="company" type="text" maxlength="80" required placeholder="e.g. Acme Technologies"><span class="field-error" id="company-error"></span></label>
+        <label class="field field-wide">Job role <span class="required">*</span><input id="role" name="role" type="text" maxlength="100" required placeholder="e.g. Software Engineer Intern"><span class="field-error" id="role-error"></span></label>
+        <label class="field">Job type<select id="job-type" name="jobType"><option>Internship</option><option>Full-Time</option><option>Internship + PPO</option></select></label>
+        <label class="field">Hiring status<select id="status" name="status"><option>Wishlist</option><option>Applied</option><option>Online Test</option><option>Interview</option><option>Offered</option><option>Rejected</option></select></label>
+        <label class="field">Application deadline <span class="required">*</span><input id="deadline" name="deadline" type="date" required><span class="field-error" id="deadline-error"></span></label>
+        <label class="field">Package <span class="field-hint">(optional)</span><span class="package-input"><input id="package" name="package" type="number" min="0" max="999" step="0.1" placeholder="e.g. 8.5"><span>LPA</span></span><span class="field-error" id="package-error"></span></label>
+        <label class="field field-wide">Preparation notes <span class="field-hint">(optional, max 500 characters)</span><textarea id="notes" name="notes" rows="3" maxlength="500" placeholder="Topics to revise, contact details, interview notes..."></textarea><span class="note-footer"><span class="field-error" id="notes-error"></span><span id="notes-count">0 / 500</span></span></label>
+      </div>
+      <div class="form-feedback" id="form-feedback" role="alert" hidden></div>
+      <div class="dialog-actions"><button class="button button-quiet" type="button" id="cancel-dialog">Cancel</button><button class="button button-primary" type="submit" id="save-button">Save application</button></div>
+    </form>
+  </dialog>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <noscript><p class="noscript-message">JavaScript is required to use the Placement Tracker.</p></noscript>
+</body>
+</html>
